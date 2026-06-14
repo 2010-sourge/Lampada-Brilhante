@@ -1,0 +1,108 @@
+/* Reset padrão de estilos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', Arial, sans-serif;
+}
+
+/* Fundo escuro azulado idêntico ao do vídeo */
+body {
+    background-color: #1e222b;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.bulb-container {
+    position: relative;
+    text-align: center;
+}
+
+/* Esconde o checkbox padrão */
+#btn-switch {
+    display: none;
+}
+
+/* Caixa que junta a lâmpada e o botão */
+.bulb-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Container das imagens para ficarem perfeitamente sobrepostas */
+.bulb-images {
+    position: relative;
+    width: 200px;
+    height: 300px;
+    margin-bottom: 30px;
+}
+
+.bulb-images img {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: auto;
+    transition: opacity 0.3s ease;
+}
+
+/* --- ESTADOS DA LÂMPADA --- */
+
+/* Padrão (Desligado): Mostra apagada, esconde acesa */
+.bulb-off {
+    opacity: 1;
+}
+
+.bulb-on {
+    opacity: 0;
+    /* Cria o efeito de aura iluminada amarela ao redor da lâmpada acesa */
+    filter: drop-shadow(0 0 40px rgba(255, 230, 100, 0.6)) 
+            drop-shadow(0 0 75px rgba(255, 230, 100, 0.4));
+}
+
+/* Quando o botão for clicado (Ligado): Esconde apagada, mostra acesa */
+#btn-switch:checked ~ .bulb-box .bulb-off {
+    opacity: 0;
+}
+
+#btn-switch:checked ~ .bulb-box .bulb-on {
+    opacity: 1;
+}
+
+/* --- ESTILO DO BOTÃO --- */
+
+/* Design do botão "TURN ON" / "TURN OFF" */
+.button-mock {
+    border: 2px solid #ffffff;
+    background: transparent;
+    color: #ffffff;
+    padding: 10px 25px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+/* Texto padrão quando o checkbox NÃO está marcado */
+.button-mock::after {
+    content: "TURN ON";
+}
+
+/* Texto muda automaticamente quando o botão é ativado */
+#btn-switch:checked ~ .bulb-box .button-mock::after {
+    content: "TURN OFF";
+}
+
+/* Efeito de hover simples no botão */
+.bulb-box:hover .button-mock {
+    background-color: rgba(255, 255, 255, 0.1);
+}
